@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const API_URL = 'http://localhost:5000/api/user';
+import API_ENDPOINTS from '../../config/api';
 
 const LoginPage = ({ onLogin }) => {
   const [tab, setTab] = useState('user');
@@ -27,7 +26,7 @@ const LoginPage = ({ onLogin }) => {
     setLoading(true);
     if (tab === 'user') {
       try {
-        const res = await fetch(`${API_URL}/login`, {
+        const res = await fetch(API_ENDPOINTS.USER_LOGIN, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: form.email, password: form.password })
@@ -60,7 +59,7 @@ const LoginPage = ({ onLogin }) => {
     setLoading(true);
     if (form.email && form.password && form.name) {
       try {
-        const res = await fetch(`${API_URL}/register`, {
+        const res = await fetch(API_ENDPOINTS.USER_REGISTER, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name: form.name, email: form.email, password: form.password })

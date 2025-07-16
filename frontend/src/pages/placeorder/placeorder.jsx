@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import './placeorder.css'
 import { StoreContext } from '../../context/store-context';
+import API_ENDPOINTS from '../../config/api';
 
 function PlaceOrder() {
   const { cartitemIds, food_list, getTotalCartAmount, setCartitemIds } = useContext(StoreContext);
@@ -29,7 +30,7 @@ function PlaceOrder() {
     const user = form.email || 'guest';
     const total = getTotalCartAmount() + (getTotalCartAmount() === 0 ? 0 : 2);
     try {
-      const res = await fetch('http://localhost:5000/api/order', {
+      const res = await fetch(API_ENDPOINTS.ORDER_CREATE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user, items, total })
